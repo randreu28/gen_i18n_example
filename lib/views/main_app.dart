@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gen_i18n_example/notifiers/preferences.dart';
+import 'package:gen_i18n_example/view_model/preferences.dart';
 
 class MainApp extends ConsumerWidget {
   const MainApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final preferences = ref.watch(preferencesNotifierProvider);
+    final preferences = ref.watch(preferencesViewModelProvider);
     final isDarkMode = preferences.value?.themeMode == ThemeMode.dark;
 
     void toggleThemeMode(bool isDarkMode) {
-      final preferencesNotifier = ref.read(
-        preferencesNotifierProvider.notifier,
+      final preferencesViewModel = ref.read(
+        preferencesViewModelProvider.notifier,
       );
 
-      preferencesNotifier.setThemeMode(
+      preferencesViewModel.setThemeMode(
         isDarkMode ? ThemeMode.light : ThemeMode.dark,
       );
     }
 
     void switchLocale(Locale locale) {
-      final preferencesNotifier = ref.read(
-        preferencesNotifierProvider.notifier,
+      final preferencesViewModel = ref.read(
+        preferencesViewModelProvider.notifier,
       );
 
-      preferencesNotifier.setLocale(locale);
+      preferencesViewModel.setLocale(locale);
     }
 
     return Scaffold(

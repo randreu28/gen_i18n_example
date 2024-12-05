@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 part 'preferences.g.dart';
 
 @riverpod
-class PreferencesNotifier extends _$PreferencesNotifier {
+class PreferencesViewModel extends _$PreferencesViewModel {
   static const _themeModeKey = 'theme_mode';
   static const _localeKey = 'locale';
 
