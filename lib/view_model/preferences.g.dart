@@ -7,11 +7,9 @@ part of 'preferences.dart';
 // **************************************************************************
 
 String _$preferencesViewModelHash() =>
-    r'c84ab4446febe39f8d5b65a8224b5de1fdcd36f8';
+    r'892a9f53cb2691bdbab326180da2bf499ac345cf';
 
-///TODO: Implement this
-///
-/// Copied from [PreferencesViewModel].
+/// See also [PreferencesViewModel].
 @ProviderFor(PreferencesViewModel)
 final preferencesViewModelProvider = AutoDisposeAsyncNotifierProvider<
     PreferencesViewModel, Preferences>.internal(

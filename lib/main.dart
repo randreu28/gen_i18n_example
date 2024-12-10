@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gen_i18n_example/injection.dart';
 import 'package:gen_i18n_example/view_model/preferences.dart';
 import 'package:gen_i18n_example/views/main_app.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await setupInjection();
+
   runApp(const ProviderScope(
     child: MyApp(),
   ));

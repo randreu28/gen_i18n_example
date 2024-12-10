@@ -33,6 +33,10 @@ class PreferencesService extends _$PreferencesService
   Future<void> setThemeMode(ThemeMode themeMode) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(_themeModeKey, themeMode.index);
+
+    //This fials! because Get it and riverpod are not meant to work together
+    ///Exception has occurred.
+    /// LateError (LateInitializationError: Field '_element@41502701' has not been initialized.)
     state = state
         .whenData((currentPref) => currentPref.copyWith(themeMode: themeMode));
   }
