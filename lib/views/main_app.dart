@@ -10,24 +10,7 @@ class MainApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final preferences = ref.watch(preferencesViewModelProvider);
     final isDarkMode = preferences.value?.themeMode == ThemeMode.dark;
-
-    void toggleThemeMode(bool isDarkMode) {
-      final preferencesViewModel = ref.read(
-        preferencesViewModelProvider.notifier,
-      );
-
-      preferencesViewModel.setThemeMode(
-        isDarkMode ? ThemeMode.light : ThemeMode.dark,
-      );
-    }
-
-    void switchLocale(Locale locale) {
-      final preferencesViewModel = ref.read(
-        preferencesViewModelProvider.notifier,
-      );
-
-      preferencesViewModel.setLocale(locale);
-    }
+    final viewModel = ref.read(preferencesViewModelProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -35,11 +18,11 @@ class MainApp extends ConsumerWidget {
         actions: [
           IconButton(
             icon: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),
-            onPressed: () => toggleThemeMode(isDarkMode),
+            onPressed: () => viewModel.toggleThemeMode(isDarkMode),
           ),
           PopupMenuButton<Locale>(
             icon: const Icon(Icons.language),
-            onSelected: switchLocale,
+            onSelected: viewModel.switchLocale,
             itemBuilder: (BuildContext context) {
               return AppLocalizations.supportedLocales.map((Locale locale) {
                 return PopupMenuItem<Locale>(

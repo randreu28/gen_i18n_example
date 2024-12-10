@@ -6,24 +6,22 @@ part of 'preferences.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$preferencesViewModelHash() =>
-    r'c84ab4446febe39f8d5b65a8224b5de1fdcd36f8';
+String _$preferencesServiceHash() =>
+    r'84c853341d7e41cee418768fdf27df2f8bce56e9';
 
-///TODO: Implement this
-///
-/// Copied from [PreferencesViewModel].
-@ProviderFor(PreferencesViewModel)
-final preferencesViewModelProvider = AutoDisposeAsyncNotifierProvider<
-    PreferencesViewModel, Preferences>.internal(
-  PreferencesViewModel.new,
-  name: r'preferencesViewModelProvider',
+/// See also [PreferencesService].
+@ProviderFor(PreferencesService)
+final preferencesServiceProvider =
+    AutoDisposeAsyncNotifierProvider<PreferencesService, Preferences>.internal(
+  PreferencesService.new,
+  name: r'preferencesServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$preferencesViewModelHash,
+      : _$preferencesServiceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$PreferencesViewModel = AutoDisposeAsyncNotifier<Preferences>;
+typedef _$PreferencesService = AutoDisposeAsyncNotifier<Preferences>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
