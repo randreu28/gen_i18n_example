@@ -5,10 +5,13 @@ import 'package:gen_i18n_example/repositories/preferences.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-part 'preferences.g.dart';
+part 'preferences_impl.g.dart';
+
+/// NOTE: This implements things that perhaps should be in a service,
+/// but it's a good example of how to use riverpod and get_it together
 
 @riverpod
-class PreferencesService extends _$PreferencesService
+class PreferencesRepositoryImpl extends _$PreferencesRepositoryImpl
     implements PreferencesRepository {
   static const _themeModeKey = 'theme_mode';
   static const _localeKey = 'locale';
@@ -34,9 +37,6 @@ class PreferencesService extends _$PreferencesService
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(_themeModeKey, themeMode.index);
 
-    //This fials! because Get it and riverpod are not meant to work together
-    ///Exception has occurred.
-    /// LateError (LateInitializationError: Field '_element@41502701' has not been initialized.)
     state = state
         .whenData((currentPref) => currentPref.copyWith(themeMode: themeMode));
   }
