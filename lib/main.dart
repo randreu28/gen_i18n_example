@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gen_i18n_example/injection.dart';
-import 'package:gen_i18n_example/view_model/preferences.dart';
 import 'package:gen_i18n_example/views/main_app.dart';
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  await setupInjection();
-
   runApp(const ProviderScope(
     child: MyApp(),
   ));
@@ -19,14 +16,19 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final preferences = ref.watch(preferencesViewModelProvider);
+    final preferencesAsync = ref.watch(preferencesStateProvider);
+
+    // Handle loading or error states if needed
+    final preferences = preferencesAsync.asData?.value;
+    final locale = preferences?.locale;
+    final themeMode = preferences?.themeMode ?? ThemeMode.system;
 
     return MaterialApp(
-      locale: preferences.value?.locale,
+      locale: locale,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: const MainApp(),
-      themeMode: preferences.value?.themeMode,
+      themeMode: themeMode,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
